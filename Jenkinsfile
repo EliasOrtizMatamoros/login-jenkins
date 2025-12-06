@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        PATH = "/usr/local/node20/bin:${env.PATH}"
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -10,6 +14,7 @@ pipeline {
 
         stage('Verificar Node y npm') {
             steps {
+                sh 'which node'
                 sh 'node -v'
                 sh 'npm -v'
             }
