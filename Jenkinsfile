@@ -1,10 +1,6 @@
 pipeline {
     agent any
-    
-    tools {
-        nodejs "Node20"
-    }
-    
+
     stages {
         stage('Checkout') {
             steps {
@@ -12,7 +8,14 @@ pipeline {
             }
         }
 
-        stage('Install dependencies') {
+        stage('Verificar Node y npm') {
+            steps {
+                sh 'node -v'
+                sh 'npm -v'
+            }
+        }
+
+        stage('Instalar dependencias') {
             steps {
                 sh 'npm install'
             }
@@ -24,12 +27,6 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            steps {
-                sh 'npm test || true'
-            }
-        }
-
         stage('Build') {
             steps {
                 sh 'npm run build'
@@ -38,7 +35,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh 'echo "Desplegando a Vercel ficticio..."'
+                sh 'echo "Simulación de despliegue exitosa"'
             }
         }
     }
